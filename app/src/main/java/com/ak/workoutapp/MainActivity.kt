@@ -1,5 +1,7 @@
 package com.ak.workoutapp
 
+
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         llStart.setOnClickListener {
             Toast.makeText(this,"this working fine ",Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,ExerciseActivity::class.java)
+            startActivity(intent)
         }
     }
 }
