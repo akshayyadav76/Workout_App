@@ -73,8 +73,23 @@
 
                 </TextView>
             </LinearLayout>
-
         </FrameLayout>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Upcoming Exercise"
+            android:textSize="22sp"
+
+            />
+        <TextView
+            android:id="@+id/exerciseName"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Upcoming Exercise"
+            android:textSize="28sp"
+            android:textStyle="bold"
+
+            />
 
     </LinearLayout>
 
@@ -89,7 +104,17 @@
         android:orientation="vertical"
         android:visibility="gone">
 
+        <ImageView
+            android:id="@+id/exercise_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:contentDescription="Image"
+            />
+
         <TextView
+            android:id="@+id/tvExerciseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exersise Time"
@@ -139,5 +164,12 @@
         </FrameLayout>
 
     </LinearLayout>
-
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rvExerciseStatus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:layout_margin="5dp"
+      />
 </RelativeLayout>

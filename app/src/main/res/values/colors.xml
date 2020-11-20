@@ -6,4 +6,6 @@
 
     <color name="colorHighLighted">#c4c4c4</color>
     <color name="colorWhite">#ffffff</color>
+
+    <color name="item_color">#938A8A</color>
 </resources>
