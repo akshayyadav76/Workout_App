@@ -1,5 +1,6 @@
 package com.ak.workoutapp
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +22,10 @@ import kotlin.collections.ArrayList
 class ExerciseActivity : AppCompatActivity() ,TextToSpeech.OnInitListener{
 
     private var restTimer : CountDownTimer? =null
-    private  var restProgress =0
+    private  var restProgress =-1
 
     private var restTimer2 : CountDownTimer? =null
-    private  var restProgress2 =0
+    private  var restProgress2 =-1
 
     private var exerciseList :ArrayList<ExerciseModel>? =null
     private var currentExercisePosition  = -1
@@ -83,7 +84,7 @@ class ExerciseActivity : AppCompatActivity() ,TextToSpeech.OnInitListener{
 
     private fun setRestProgressBar(){
         progress_bar.progress = restProgress
-        restTimer =  object : CountDownTimer(10000,1000){
+        restTimer =  object : CountDownTimer(2000,1000){
             override fun onTick(p0: Long) {
                restProgress++
                 Log.e("my progreess bar check","$restProgress")
@@ -94,6 +95,8 @@ class ExerciseActivity : AppCompatActivity() ,TextToSpeech.OnInitListener{
 
             override fun onFinish() {
                 currentExercisePosition++
+                exerciseList!![currentExercisePosition].setIsSelected(true)
+                exerciseAdaptor!!.notifyDataSetChanged()
                 setupRestView2()
 
             }
@@ -103,7 +106,7 @@ class ExerciseActivity : AppCompatActivity() ,TextToSpeech.OnInitListener{
 
     private fun setRestProgressBar2(){
         progress_bar2.progress = restProgress2
-        restTimer2 =  object : CountDownTimer(30000,1000){
+        restTimer2 =  object : CountDownTimer(1000,1000){
             override fun onTick(p0: Long) {
                 restProgress2++
                 Log.e("my progreess bar check","$restProgress2")
@@ -113,10 +116,17 @@ class ExerciseActivity : AppCompatActivity() ,TextToSpeech.OnInitListener{
             }
 
             override fun onFinish() {
+                Log.e("current","$currentExercisePosition")
+                if(currentExercisePosition <7){
+                    exerciseList!![currentExercisePosition].setIsSelected(false)
+                    exerciseList!![currentExercisePosition].setIsCompleted(true)
 
-                if(currentExercisePosition <8){
+                    exerciseAdaptor!!.notifyDataSetChanged()
                     setupRestView()
                 }else{
+                    finish()
+                    val intent = Intent(this@ExerciseActivity,finish_activity::class.java)
+                    startActivity(intent)
                     Toast.makeText(this@ExerciseActivity,"workout finish",Toast.LENGTH_SHORT).show()
                 }
             }
