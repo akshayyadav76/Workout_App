@@ -10,6 +10,12 @@ import java.math.RoundingMode
 
 class BMIActivity : AppCompatActivity() {
 
+    val metrics_units_view ="metrics_unit_view"
+    val us_unit_view = "us unit_view"
+
+
+    var currentVisibleUnits:String = "metrics_unit_view"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b_m_i)
@@ -37,6 +43,15 @@ class BMIActivity : AppCompatActivity() {
 
             }else{
                 Toast.makeText(this@BMIActivity,"enter something",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        makeVisibleMetricsview()
+        rgUnits.setOnCheckedChangeListener { group, checked ->
+            if(checked == R.id.rbMatricUnits){
+                makeVisibleMetricsview()
+            }else{
+                makeVisibleUSview()
             }
         }
 
@@ -87,15 +102,43 @@ class BMIActivity : AppCompatActivity() {
             bmiDescription = "oops you really need to take care of your better "
         }
 
-        tvYourBMI.visibility = View.VISIBLE
-        tvBMIValue.visibility = View.VISIBLE
-        tvBMIType.visibility = View.VISIBLE
-        tvBMIDescription.visibility = View.VISIBLE
+        llDisplayBMIresult.visibility = View.VISIBLE
+//        tvYourBMI.visibility = View.VISIBLE
+//        tvBMIValue.visibility = View.VISIBLE
+//        tvBMIType.visibility = View.VISIBLE
+//        tvBMIDescription.visibility = View.VISIBLE
 
       val bmiValue = BigDecimal(bmi.toDouble()).setScale(2,RoundingMode.HALF_EVEN).toString()
         tvBMIValue.text = bmiValue
         tvBMIType.text = bmiLabel
         tvBMIDescription.text = bmiDescription
 
+    }
+
+    private  fun makeVisibleMetricsview(){
+        currentVisibleUnits = metrics_units_view
+        tilMatricUnitHeight.visibility = View.VISIBLE
+        tilMatricUnitWeight.visibility = View.VISIBLE
+
+        etMatricUnitHeight.text!!.clear()
+        etMatricUnitWeight.text!!.clear()
+
+        tilUsUnitWeight.visibility = View.GONE
+        llus.visibility = View.GONE
+        llDisplayBMIresult.visibility = View.INVISIBLE
+    }
+
+    private  fun makeVisibleUSview(){
+        currentVisibleUnits = us_unit_view
+        tilMatricUnitHeight.visibility = View.GONE
+        tilMatricUnitWeight.visibility = View.GONE
+
+        etUsUnitWeight.text!!.clear()
+        etUsUnitHeightFeed.text!!.clear()
+        etUsUnitHeightInch.text!!.clear()
+
+        tilUsUnitWeight.visibility = View.VISIBLE
+        llus.visibility = View.VISIBLE
+        llDisplayBMIresult.visibility = View.INVISIBLE
     }
 }
