@@ -1,5 +1,6 @@
 package com.ak.workoutapp
 
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build
@@ -15,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_exercise.*
+import kotlinx.android.synthetic.main.custom_alert_dialog.*
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
@@ -51,7 +53,10 @@ class ExerciseActivity : AppCompatActivity() ,TextToSpeech.OnInitListener{
         }
 
         toolbar_exercise_activity.setNavigationOnClickListener {
-            onBackPressed()
+
+            customDialog()
+
+           // onBackPressed()
         }
         exerciseList = Constants.defaultExerciseList()
         setupRestView()
@@ -198,4 +203,17 @@ class ExerciseActivity : AppCompatActivity() ,TextToSpeech.OnInitListener{
         rvExerciseStatus.adapter = exerciseAdaptor
     }
 
+
+    private fun customDialog(){
+        val dilaog = Dialog(this)
+        dilaog.setContentView(R.layout.custom_alert_dialog)
+        dilaog.ok.setOnClickListener {
+            finish()
+            dilaog.dismiss()
+        }
+        dilaog.btncancle.setOnClickListener {
+            dilaog.dismiss()
+        }
+        dilaog.show()
+    }
 }

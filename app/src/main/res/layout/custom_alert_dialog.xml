@@ -20,6 +20,36 @@
         android:text="if you want you can finish your workout  "
         android:textSize="20sp"
         />
-    
+    <LinearLayout
+        android:id="@+id/custom_alert_linerLayout"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+
+
+        >
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="OK"
+            android:textSize="25sp"
+            android:background="@drawable/item_circular_accent_bg"
+            />
+
+        <Button
+            android:id="@+id/btncancle"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="cancle"
+            android:background="@drawable/item_circular_accent_bg"
+            android:textSize="25sp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
