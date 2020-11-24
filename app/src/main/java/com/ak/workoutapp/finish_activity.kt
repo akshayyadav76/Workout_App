@@ -6,6 +6,7 @@ import android.util.Log
 import kotlinx.android.synthetic.main.activity_finish_activity.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.log
 
 class finish_activity : AppCompatActivity() {
@@ -46,6 +47,8 @@ class finish_activity : AppCompatActivity() {
         dbHendler.addDate(date)
         Log.e("date","added")
     }
+
+
 
 
 }
