@@ -2,6 +2,7 @@ package com.ak.workoutapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_b_m_i.*
@@ -34,16 +35,37 @@ class BMIActivity : AppCompatActivity() {
 
 
         btnCalculateUnit.setOnClickListener {
-            if(validDateMatricUnit()){
-                val heightValue :Float= etMatricUnitHeight.text.toString().toFloat() /100
-                val weightValue :Float= etMatricUnitHeight.text.toString().toFloat()
 
-                val bmi = weightValue /(heightValue*heightValue)
-                displayBMIResult(bmi)
+            if(currentVisibleUnits == metrics_units_view){
+                if(validDateMatricUnit()){
+                    val heightValue :Float= etMatricUnitHeight.text.toString().toFloat() /100
+                    val weightValue :Float= etMatricUnitHeight.text.toString().toFloat()
+
+                    val bmi = weightValue /(heightValue*heightValue)
+                    displayBMIResult(bmi)
+
+                } else{
+                    Toast.makeText(this@BMIActivity,"enter metrics something",Toast.LENGTH_SHORT).show()
+                }
 
             }else{
-                Toast.makeText(this@BMIActivity,"enter something",Toast.LENGTH_SHORT).show()
+                if(validDateUsUnit()){
+
+                   val usheightfeed :String = etUsUnitHeightFeed.text.toString()
+                   val usInch :String =etUsUnitHeightInch.text.toString()
+                    val uswidgt:Float = etUsUnitWeight.text.toString().toFloat()
+
+                    val heigtValue = usInch.toFloat() +usheightfeed.toFloat() *12
+
+                    val bmi =  703 * (uswidgt / (heigtValue*heigtValue))
+                    displayBMIResult(bmi)
+
+
+                } else{
+                    Toast.makeText(this@BMIActivity,"enter us something",Toast.LENGTH_SHORT).show()
+                }
             }
+
         }
 
         makeVisibleMetricsview()
@@ -52,6 +74,7 @@ class BMIActivity : AppCompatActivity() {
                 makeVisibleMetricsview()
             }else{
                 makeVisibleUSview()
+                Log.e("us", "$currentVisibleUnits")
             }
         }
 
@@ -64,6 +87,18 @@ class BMIActivity : AppCompatActivity() {
         if(etMatricUnitHeight.text.toString().isEmpty()){
             isValid = false
         }else if(etMatricUnitWeight.text.toString().isEmpty()){
+            isValid  = false
+        }
+
+        return isValid
+    }
+
+    private fun validDateUsUnit():Boolean{
+        var isValid = true
+
+        if(etUsUnitWeight.text.toString().isEmpty()){
+            isValid = false
+        }else if(etUsUnitHeightFeed.text.toString().isEmpty() && etUsUnitHeightInch.text.toString().isEmpty()){
             isValid  = false
         }
 
